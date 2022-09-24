@@ -339,14 +339,19 @@ package <strong>with dependencies</strong> and making sure that you have
 a local installation of Chrome.</p>
 <div id="installation" class="section level1">
 <h1>Installation</h1>
-<p>You can install the current version of renderthis from GitHub:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;remotes&quot;)</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;jhelvy/renderthis&quot;</span>)</span></code></pre></div>
+<p>You can install the latest version of renderthis from <a href="https://cran.r-project.org/">CRAN</a> with:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;renderthis&quot;</span>)</span></code></pre></div>
+<p>And the development version from GitHub with:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;remotes&quot;)</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;jhelvy/renderthis&quot;</span>)</span></code></pre></div>
 <p>Some output formats require additional packages, and each format will
 provide instructions about how to install any missing dependencies. You
 can also choose to install renderthis with all of its dependencies:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;remotes&quot;)</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;jhelvy/renderthis&quot;</span>, <span class="at">dependencies =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># From CRAN</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;renderthis&quot;</span>, <span class="at">dependencies =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># From GitHub</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;jhelvy/renderthis&quot;</span>, <span class="at">dependencies =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 </div>
 <div id="local-chrome-installation" class="section level1">
 <h1>Local Chrome Installation</h1>
@@ -359,8 +364,11 @@ package as well as the <a href="https://github.com/rstudio/chromote">chromote</a
 use the <code>complex_slides = TRUE</code> or
 <code>partial_slides = TRUE</code> arguments.</p>
 <p>After installing the packages, you can set the paths like this:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.setenv</span>(<span class="at">PAGEDOWN_CHROME =</span> <span class="st">&quot;/path/to/browser&quot;</span>)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.setenv</span>(<span class="at">CHROMOTE_CHROME =</span> <span class="st">&quot;/path/to/browser&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.setenv</span>(<span class="at">PAGEDOWN_CHROME =</span> <span class="st">&quot;/path/to/browser&quot;</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.setenv</span>(<span class="at">CHROMOTE_CHROME =</span> <span class="st">&quot;/path/to/browser&quot;</span>)</span></code></pre></div>
+<p>If you’re not sure where Chrome lives on your machine, try the
+following command to search for it:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>pagedown<span class="sc">::</span><span class="fu">find_chrome</span>()</span></code></pre></div>
 <p>If you are unable to install Chrome (e.g. on a computing cluster),
 the recommended workflow is to render intermediate output formats and
 use an alternative method for rendering the PDF.</p>
@@ -373,6 +381,55 @@ html on a local machine (preferrably with Chrome installed)</li>
 <li>Save to pdf on Chrome</li>
 <li>Render the pptx with <code>to_pptx(from = &quot;slides.pdf&quot;)</code></li>
 </ol>
+</div>
+<div id="dependencies" class="section level1">
+<h1>Dependencies</h1>
+<p>Because many users will not need all output formats, several outputs
+require additional packages that are suggested dependencies and aren’t
+installed by default unless requested as described above. The table
+below lists the packages required for each output type:</p>
+<table>
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Output</th>
+<th align="left">Requires</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">PDF (simple)</td>
+<td align="left">Google Chrome (for <a href="https://pagedown.rbind.io/">pagedown</a>)</td>
+</tr>
+<tr class="even">
+<td align="left">PDF (complex)</td>
+<td align="left"><a href="https://rstudio.github.io/chromote/">chromote</a></td>
+</tr>
+<tr class="odd">
+<td align="left">PNG</td>
+<td align="left">Requires PDF</td>
+</tr>
+<tr class="even">
+<td align="left">GIF</td>
+<td align="left">Requires PDF</td>
+</tr>
+<tr class="odd">
+<td align="left">MP4</td>
+<td align="left"><a href="https://docs.ropensci.org/av/">av</a></td>
+</tr>
+<tr class="even">
+<td align="left">PPTX</td>
+<td align="left"><a href="https://ardata-fr.github.io/officeverse/">officer</a></td>
+</tr>
+<tr class="odd">
+<td align="left">Social</td>
+<td align="left"><a href="https://rstudio.github.io/webshot2/">webshot2</a></td>
+</tr>
+</tbody>
+</table>
 </div>
 
 
